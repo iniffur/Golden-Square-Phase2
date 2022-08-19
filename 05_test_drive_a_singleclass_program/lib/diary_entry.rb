@@ -2,6 +2,7 @@ class DiaryEntry
     def initialize(title, contents) # title, contents are strings
       @title = title
       @contents = contents
+      @final_word = 0
     end
   
     def title
@@ -20,56 +21,29 @@ class DiaryEntry
         end
     end
   
-    def count_words
+    def count_words   
       # Returns the number of words in the contents as an integer
-      @word_count =  @contents.split(" ").count
+      @word_count =  @contents.split(" ").length
       return @word_count
     end
     
   
-    def reading_time(wpm) # wpm is an integer representing the number of words the
-                          # user can read per minute
-      # Returns an integer representing an estimate of the reading time in minutes
-      # for the contents at the given wpm.
-        
-      @reading_time = (@word_count/wpm).ceil
+    def reading_time(wpm) 
+      fail "Please enter a valid reading time" unless wpm > 0  
+      @reading_time = (@word_count/wpm.to_f).ceil
       return @reading_time
-      
-    
     end
   
     def reading_chunk(wpm, minutes) 
-      @original_contents = @contents  
-      @arr = @contents.split(" ")
-      @number_of_words = wpm * minutes
-        if @arr.length <= @number_of_words
-            return @contents
-        else
-            @chunk = @contents.split[0...@number_of_words].join(" ")
-            return @chunk
-            @contents = @contents.split(" ") - @chunk.split(" ").join(" ")
-                if @contents.length == 0
-                    @contents = @original_contents
-                end
-        end
-
-        # `wpm` is an integer representing the number
-        # of words the user can read per minute
-        # `minutes` is an integer representing the
-        # number of minutes the user has to read
-      # Returns a string with a chunk of the contents that the user could read
-      # in the given number of minutes.
-      # If called again, `reading_chunk` should return the next chunk, skipping
-      # what has already been read, until the contents is fully read.
-      # The next call after that it should restart from the beginning.
+        @number_of_words = wpm * minutes
+        @initial_point = @final_word
+        @final_point = @final_word + @number_of_words
+        @chunk = @contents.split[@initial_point...@final_point].join(" ")
+            if @final_point > @contents.split(" ").length
+                @final_word = 0
+            else
+                @final_word = @final_point
+            end
+        return @chunk
     end
 end
-
-def run_code
-     diary_entry = DiaryEntry.new("Title", "This is the contents of this story")
-     diary_entry.reading_chunk(3,1)
-     puts diary_entry.reading_chunk(3,1)
-     puts diary_entry.reading_chunk(3,1)
-end
-
-run_code
