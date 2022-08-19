@@ -12,4 +12,10 @@ RSpec.describe MyMusic do
     result = music.add_music("Alright, Kendrick Lamar")
     expect(result).to eq ["Alright, Kendrick Lamar"]
   end
+  it "Returns the music list when added two tracks" do
+    music = MyMusic.new
+    music.add_music("Alright, Kendrick Lamar")
+    result = music.add_music("Lego house, Ed Sheeran")
+    expect(result).to eq ["Alright, Kendrick Lamar", "Lego house, Ed Sheeran"]
+  end
 end
