@@ -18,4 +18,10 @@ RSpec.describe MyMusic do
     result = music.add_music("Lego house, Ed Sheeran")
     expect(result).to eq ["Alright, Kendrick Lamar", "Lego house, Ed Sheeran"]
   end
+  context "Throws an error if given an integer" do
+    it "fails" do
+      music = MyMusic.new
+      expect{ music.add_music(4)}.to raise_error "Please enter a valid track"
+    end
+  end  
 end
