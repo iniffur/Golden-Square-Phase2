@@ -7,4 +7,9 @@ RSpec.describe MyMusic do
       expect{music.add_music("")}.to raise_error "No music added"
     end
   end
+  it "Returns the music list after adding a track" do
+    music = MyMusic.new
+    result = music.add_music("Alright, Kendrick Lamar")
+    expect(result).to eq ["Alright, Kendrick Lamar"]
+  end
 end
