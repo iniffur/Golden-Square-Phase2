@@ -40,7 +40,7 @@ music.add_music("Alright, Kendrick Lamar") # => ["Alright, Kendrick Lamar"]
 
 # 3
 music = MyMusic.new
-music.add_music("Alright, Kendrick Lamar") 
+music.add_music("Alright, Kendrick Lamar")
 music.add_music("Lego house, Ed Sheeran") # => ["Alright, Kendrick Lamar", "Lego house, Ed Sheeran"]
 ```
 
