@@ -6,32 +6,23 @@ class DiaryEntry
     end
   
     def title
-        if @title.length == 0
-            fail "Please enter a valid string."
-        else
-            return @title
-        end
+      fail "Please enter a valid string." if @title.empty?
+      return @title
     end
   
     def contents
-        if @contents.length == 0
-            fail "Please enter a valid string."
-        else
-            return @contents
-        end
+      fail "Please enter a valid string." if @contents.empty?
+      return @contents
     end
   
     def count_words   
       # Returns the number of words in the contents as an integer
       @word_count =  @contents.split(" ").length
-      return @word_count
     end
     
-  
     def reading_time(wpm) 
       fail "Please enter a valid reading time" unless wpm > 0  
-      @reading_time = (@word_count/wpm.to_f).ceil
-      return @reading_time
+      (@word_count/wpm.to_f).ceil
     end
   
     def reading_chunk(wpm, minutes) 
