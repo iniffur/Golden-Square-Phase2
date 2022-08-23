@@ -22,6 +22,11 @@ RSpec.describe DiaryEntry do
             expect(diary_entry.count_words).to eq 4
         end
 
+        it "returns zero if contents is empty" do
+            diary_entry = DiaryEntry.new("Title", "")
+            expect(diary_entry.count_words).to eq 0
+        end
+
         it "returns a reading time based on a given words per minute - rounded up" do
             diary_entry = DiaryEntry.new("Title", "This is the contents")
             diary_entry.count_words

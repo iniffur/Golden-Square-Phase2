@@ -22,16 +22,14 @@ class DiaryEntry
     end
   
     def count_words   
-      # Returns the number of words in the contents as an integer
-      @word_count =  @contents.split(" ").length
-      return @word_count
+      return @contents.split(" ").length
+      return 0 if @contents.empty?
     end
     
   
     def reading_time(wpm) 
-      fail "Please enter a valid reading time" unless wpm > 0  
-      @reading_time = (@word_count/wpm.to_f).ceil
-      return @reading_time
+        fail "Please enter a valid reading time" unless wpm > 0  
+        (count_words / wpm.to_f).ceil
     end
   
     def reading_chunk(wpm, minutes) 
