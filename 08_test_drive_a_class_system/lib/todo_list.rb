@@ -8,14 +8,22 @@ class TodoList
     end
   
     def incomplete
-      # Returns all non-done todos
+      ## .select is used to only SELECT todos that have not been completed
+      @list_items.select do |todo|
+        !todo.done?
+      end
     end
   
     def complete
-      # Returns all complete todos
+      ## .select is used to only SELECT todos that have been completed
+      @list_items.select do |todo|
+        todo.done?
+      end
     end
   
     def give_up!
-      # Marks all todos as complete
+      @list_items.map do |todo|
+        todo.mark_done!
+      end
     end
-  end
+end
